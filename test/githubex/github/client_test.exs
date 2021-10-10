@@ -86,6 +86,20 @@ defmodule Githubex.Github.ClientTest do
       assert result == expected_response
     end
 
+    test "when there is a generic error, returns an error", %{bypass: bypass} do
+      username = "valid_username"
+
+      url = endpoint_url(bypass.port)
+
+      Bypass.down(bypass)
+
+      response = Client.get_repos(url, username)
+
+      expected_response = {:error, %Error{result: :econnrefused, status: :bad_request}}
+
+      assert response == expected_response
+    end
+
     defp endpoint_url(port), do: "http://localhost:#{port}/"
   end
 end
