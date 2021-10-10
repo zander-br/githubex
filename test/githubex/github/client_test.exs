@@ -1,6 +1,7 @@
 defmodule Githubex.Github.ClientTest do
   use ExUnit.Case, async: true
 
+  alias Githubex.Error
   alias Githubex.Github.{Client, Repository}
   alias Plug.Conn
 
@@ -11,7 +12,7 @@ defmodule Githubex.Github.ClientTest do
     end
 
     test "when there is a valid username, returns the repos", %{bypass: bypass} do
-      username = "zander-br"
+      username = "valid_user_name"
 
       url = endpoint_url(bypass.port)
 
@@ -60,6 +61,29 @@ defmodule Githubex.Github.ClientTest do
          ]}
 
       assert response == expected_response
+    end
+
+    test "when the username was not found, returns an error", %{bypass: bypass} do
+      username = "user_not_found"
+
+      body = ~s({
+        "message": "Not Found",
+        "documentation_url": "https://docs.github.com/rest/reference/repos#list-repositories-for-a-user"
+      })
+
+      url = endpoint_url(bypass.port)
+
+      Bypass.expect(bypass, "GET", "#{username}/repos", fn conn ->
+        conn
+        |> Conn.put_resp_header("content-type", "application/json")
+        |> Conn.resp(404, body)
+      end)
+
+      result = Client.get_repos(url, username)
+
+      expected_response = {:error, %Error{result: "User not found", status: :not_found}}
+
+      assert result == expected_response
     end
 
     defp endpoint_url(port), do: "http://localhost:#{port}/"
