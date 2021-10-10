@@ -7,5 +7,7 @@ defmodule GithubexWeb.Router do
 
   scope "/api", GithubexWeb do
     pipe_through :api
+
+    get "/repos/:username", ReposController, :index
   end
 end

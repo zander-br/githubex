@@ -1,9 +1,5 @@
 defmodule Githubex do
-  @moduledoc """
-  Githubex keeps the contexts that define your domain
-  and business logic.
+  alias Githubex.Github.Client, as: GithubClient
 
-  Contexts are also responsible for managing your data, regardless
-  if it comes from the database, an external API or others.
-  """
+  defdelegate get_repos_by_user(username), to: GithubClient, as: :get_repos
 end
