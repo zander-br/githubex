@@ -14,5 +14,15 @@ defmodule Githubex.Accounts.UserTest do
 
       assert %Changeset{changes: %{name: "Joe Doe"}, valid?: true} = response
     end
+
+    test "when there is some error, returns an invalid changeset" do
+      params = %{name: "Joe Doe"}
+
+      response = User.changeset(params)
+
+      expected_response = %{email: ["can't be blank"], password: ["can't be blank"]}
+
+      assert errors_on(response) == expected_response
+    end
   end
 end
