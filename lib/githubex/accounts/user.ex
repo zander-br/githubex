@@ -3,6 +3,7 @@ defmodule Githubex.Accounts.User do
 
   import Ecto.Changeset
 
+  @primary_key {:id, :binary_id, autogenerate: true}
   @required_fields ~w(name email password)a
 
   schema "users" do
