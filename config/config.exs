@@ -14,6 +14,10 @@ config :githubex, Githubex.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]
 
+config :githubex, GithubexWeb.Auth.Guardian,
+  issuer: "githubex",
+  secret_key: "CQrYk02+8K9a9V535WgcZLy0OcuHcZ4/TtHsFtUCMFMys2vRRe1c/BRIcikv55iP"
+
 # Configures the endpoint
 config :githubex, GithubexWeb.Endpoint,
   url: [host: "localhost"],
