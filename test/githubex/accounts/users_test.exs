@@ -13,5 +13,15 @@ defmodule Githubex.Accounts.UsersTest do
 
       assert {:ok, %User{id: _id, name: "Joe Doe", email: "joe.doe@mail.com"}} = response
     end
+
+    test "when there is invalid params, returns an error" do
+      params = %{name: "Joe Doe"}
+
+      response = User.changeset(params)
+
+      expected_response = %{email: ["can't be blank"], password: ["can't be blank"]}
+
+      assert errors_on(response) == expected_response
+    end
   end
 end
