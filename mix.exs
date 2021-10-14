@@ -47,7 +47,8 @@ defmodule Githubex.MixProject do
       {:hackney, "~> 1.17"},
       {:bypass, "~> 2.1", only: :test},
       {:ex_machina, "~> 2.7.0", only: :test},
-      {:pbkdf2_elixir, "~> 1.4"}
+      {:pbkdf2_elixir, "~> 1.4"},
+      {:guardian, "~> 2.0"}
     ]
   end
 
