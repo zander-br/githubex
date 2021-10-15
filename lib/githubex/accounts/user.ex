@@ -18,6 +18,6 @@ defmodule Githubex.Accounts.User do
     user
     |> cast(attrs, @required_fields)
     |> validate_required(@required_fields)
-    |> unique_constraint(:email)
+    |> unique_constraint([:email])
   end
 end
