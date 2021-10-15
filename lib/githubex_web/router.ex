@@ -9,5 +9,7 @@ defmodule GithubexWeb.Router do
     pipe_through :api
 
     get "/repos/:username", ReposController, :index
+
+    post "/users/", UserController, :create
   end
 end
