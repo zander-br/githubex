@@ -1,5 +1,5 @@
 defmodule GithubexWeb.FormatHelpersTest do
-  use Githubex.DataCase, async: true
+  use GithubexWeb.ConnCase, async: true
 
   alias GithubexWeb.FormatHelpers
 
