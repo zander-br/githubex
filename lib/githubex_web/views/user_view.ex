@@ -1,13 +1,14 @@
 defmodule GithubexWeb.UserView do
   use GithubexWeb, :view
 
+  alias Githubex.Accounts.User
   alias GithubexWeb.{FormatHelpers, UserView}
 
-  def render("show.json", %{token: token, user: user}) do
-    %{user: Map.merge(render_one(user, UserView, "user.json"), %{token: token})}
+  def render("show.json", %{token: token, user: %User{} = user}) do
+    %{"user" => Map.merge(render_one(user, UserView, "user.json"), %{"token" => token})}
   end
 
-  def render("user.json", %{user: user}) do
+  def render("user.json", %{user: %User{} = user}) do
     user
     |> Map.from_struct()
     |> Map.put(:created_at, NaiveDateTime.to_iso8601(user.inserted_at))
