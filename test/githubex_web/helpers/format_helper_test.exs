@@ -13,5 +13,15 @@ defmodule GithubexWeb.FormatHelpersTest do
 
       assert result == expected_result
     end
+
+    test "when there is a key string type in snake_case, it must be transformed into camel case" do
+      params = %{"name" => "Joe Doe", "user_name" => "joe.doe"}
+
+      result = FormatHelpers.camelize(params)
+
+      expected_result = %{"name" => "Joe Doe", "userName" => "joe.doe"}
+
+      assert result == expected_result
+    end
   end
 end
