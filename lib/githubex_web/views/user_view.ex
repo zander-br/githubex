@@ -15,4 +15,6 @@ defmodule GithubexWeb.UserView do
     |> Map.take([:id, :name, :email, :created_at])
     |> FormatHelpers.camelize()
   end
+
+  def render("sign_in.json", %{token: token}), do: %{token: token}
 end

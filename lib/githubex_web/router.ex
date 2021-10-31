@@ -10,6 +10,7 @@ defmodule GithubexWeb.Router do
 
     get "/repos/:username", ReposController, :index
 
-    post "/users/", UserController, :create
+    post "/users", UserController, :create
+    post "/users/signin", UserController, :sign_in
   end
 end
