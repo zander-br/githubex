@@ -18,6 +18,10 @@ config :githubex, GithubexWeb.Auth.Guardian,
   issuer: "githubex",
   secret_key: "CQrYk02+8K9a9V535WgcZLy0OcuHcZ4/TtHsFtUCMFMys2vRRe1c/BRIcikv55iP"
 
+config :githubex, GithubexWeb.Auth.Pipeline,
+  module: GithubexWeb.Auth.Guardian,
+  error_handler: GithubexWeb.Auth.ErrorHandler
+
 # Configures the endpoint
 config :githubex, GithubexWeb.Endpoint,
   url: [host: "localhost"],
