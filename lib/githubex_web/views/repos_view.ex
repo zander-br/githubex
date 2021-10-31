@@ -3,9 +3,10 @@ defmodule GithubexWeb.ReposView do
 
   alias Githubex.Github.Repository
 
-  def render("index.json", %{repos: repos}) do
+  def render("index.json", %{repos: repos, token: token}) do
     %{
-      repos: Enum.map(repos, &repo_json/1)
+      repos: Enum.map(repos, &repo_json/1),
+      token: token
     }
   end
 
